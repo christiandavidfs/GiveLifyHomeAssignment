@@ -102,12 +102,16 @@ We have positive and negative tests for the api tests.
 
 Negative_api_spec.cy.js
 We have tests t validate different error messages
+
 performance.cy.js
 We have easy tests to assert the load time for web and api are under 3 seconds (3000ms)
+
 Positive json against response api_spec.cy.js
 We are comparing the full json against the api response
+
 Positive_api_spec_BySearch.cy.js
 Various tests using the By Search Title
+
 Positive_api_spec_ByTitle.cy.js
 Some other positive tests searching by title, expecting valid movie titles and reatings, plus the hability to override the data to be asserted.
 
