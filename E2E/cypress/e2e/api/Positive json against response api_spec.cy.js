@@ -7,7 +7,7 @@ describe('OMDB API Response Validation', () => {
   it('Validates the API response against the fixture data', function () {
     const apiKey = Cypress.env('apiKey');
     const movieTitle = Cypress.env('movieTitle');
-    const url = `${Cypress.config('apiBaseUrl')}?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}`;
+    const url = `${Cypress.config('apiBaseUrl')}?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}&y=2018`;
 
     cy.request(url).then((response) => {
       // Validate the response status

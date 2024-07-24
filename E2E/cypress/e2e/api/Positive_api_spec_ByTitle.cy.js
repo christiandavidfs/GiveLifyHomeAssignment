@@ -7,7 +7,7 @@ describe('OMDB API Tests', () => {
   it('Checks if response status is 200 and validates response data', function () {
     const apiKey = Cypress.env('apiKey');
     const movieTitle = Cypress.env('movieTitle');
-    const url = `${Cypress.config('apiBaseUrl')}?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}`;
+    const url = `${Cypress.config('apiBaseUrl')}?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}&y=2018`;
 
     cy.request(url).then((response) => {
       // Validate the response status
@@ -30,9 +30,8 @@ describe('OMDB API Tests', () => {
         expect(rating, 'Expected first rating to have property "Value"').to.have.property('Value');
         expect(rating.Value, 'Expected first rating value to be "7.6/10"').to.eq('7.6/10');
 
-        // Add more tests as needed, comparing other fields as necessary
-
-        // Optionally override values for specific assertions
+        
+        // We can override values for specific assertions
         expect(jsonData.Runtime, 'Expected runtime to be "136 min"').to.eq('136 min');
         expect(jsonData.BoxOffice, 'Expected box office value to be "$215,333,122"').to.eq(expectedData.BoxOffice);
       } else {
