@@ -1,7 +1,7 @@
 # GiveLifyHomeAssignment
 GiveLify Home Assignment
 
-##Setup and run
+# Setup and run
 
 Install Git
 https://git-scm.com/downloads
@@ -10,6 +10,7 @@ Install Node
 https://docs.npmjs.com/downloading-and-installing-node-js-and-npm?ref=sfeir.dev
 
 Clone the repo
+
 git clone https://github.com/christiandavidfs/GiveLifyHomeAssignment.git
 
 Go to the  E2E folder
@@ -29,7 +30,7 @@ more examples can be found here:
 https://www.npmjs.com/package/@cypress/grep
 
 
-##Additional Documentation
+# Additional Documentation
 
 Word files:
 Test Plan.docx
