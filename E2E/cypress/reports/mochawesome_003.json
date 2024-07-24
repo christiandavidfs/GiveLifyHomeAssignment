@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-07-24T16:08:46.983Z",
+    "end": "2024-07-24T16:08:47.384Z",
+    "duration": 401,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4edf4b0c-9a88-43d7-ad98-24ea2657db2d",
+      "title": "",
+      "fullFile": "cypress\\e2e\\api\\Positive_api_spec_ByTitle.cy.js",
+      "file": "cypress\\e2e\\api\\Positive_api_spec_ByTitle.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "a155034f-1b7e-44fb-ac48-73be71dd7a3f",
+          "title": "OMDB API Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Checks if response status is 200 and validates response data",
+              "fullTitle": "OMDB API Tests Checks if response status is 200 and validates response data",
+              "timedOut": null,
+              "duration": 317,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const apiKey = Cypress.env('apiKey');\nconst movieTitle = Cypress.env('movieTitle');\nconst url = `${Cypress.config('apiBaseUrl')}?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}&y=2018`;\ncy.request(url).then(response => {\n  // Validate the response status\n  expect(response.status, 'Expected response status to be 200').to.eq(200);\n  if (response.status === 200) {\n    const jsonData = response.body;\n    const expectedData = this.expectedResponse; // Use the loaded fixture data\n    // Validate movie title\n    expect(jsonData.Title, 'Expected movie title to be \"A Star Is Born\"').to.eq(expectedData.Title);\n    expect(jsonData.Year, 'Expected release year to be \"2018\"').to.eq(expectedData.Year);\n    // Validate ratings\n    expect(jsonData.Ratings, 'Expected ratings to be a non-empty array').to.be.an('array').that.is.not.empty;\n    const rating = jsonData.Ratings[0];\n    expect(rating, 'Expected first rating to have property \"Source\"').to.have.property('Source');\n    expect(rating.Source, 'Expected first rating source to be \"Internet Movie Database\"').to.eq('Internet Movie Database');\n    expect(rating, 'Expected first rating to have property \"Value\"').to.have.property('Value');\n    expect(rating.Value, 'Expected first rating value to be \"7.6/10\"').to.eq('7.6/10');\n    // We can override values for specific assertions\n    expect(jsonData.Runtime, 'Expected runtime to be \"136 min\"').to.eq('136 min');\n    expect(jsonData.BoxOffice, 'Expected box office value to be \"$215,333,122\"').to.eq(expectedData.BoxOffice);\n  } else {\n    // Log an error message if the status is not 200\n    cy.log(`Error: The condition is not met. Expected status 200, but received status ${response.status}`);\n    throw new Error(`The condition is not met. Expected status 200, but received status ${response.status}`);\n  }\n});",
+              "err": {},
+              "uuid": "f1345a05-a2cf-4db6-9896-7f2eaa378bb7",
+              "parentUUID": "a155034f-1b7e-44fb-ac48-73be71dd7a3f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f1345a05-a2cf-4db6-9896-7f2eaa378bb7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 317,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

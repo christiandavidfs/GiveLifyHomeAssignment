@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-07-24T16:10:32.487Z",
+    "end": "2024-07-24T16:11:02.889Z",
+    "duration": 30402,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5dc7c0b6-6821-42a5-b466-8d89fa66a44f",
+      "title": "",
+      "fullFile": "cypress\\e2e\\ui\\general_Navigation.cy.js",
+      "file": "cypress\\e2e\\ui\\general_Navigation.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "38d2b32b-a33d-4367-a0bf-02f1c32c9363",
+          "title": "Do search and advance until step 3 of the donation",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Performs a search and clicks on an autocomplete result",
+              "fullTitle": "Do search and advance until step 3 of the donation Performs a search and clicks on an autocomplete result",
+              "timedOut": null,
+              "duration": 25160,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Type the search query and hit Enter\n_searchPage.default.typeSearchQuery('Givelify');\n_searchPage.default.clickSearchButton();\n// Click on the autocomplete result containing the specific text\n_searchPage.default.clickAutocompleteResult('Givelify');\n// Add your assertions here\ncy.url().should('include', 'NzYwOTQ');\n_donationPage.default.doneeInfo.should('be.visible');\n_donationPage.default.doneeInfo.should('contain', 'Givelify Give.com Foundation');\n_donationPage.default.chooseAmount.should('be.visible');\n_donationPage.default.chooseAmount.should('contain', 'Choose a gift amount');\n_donationPage.default.getValueButton(1).should('contain.text', '$10');\n_donationPage.default.getValueButton(2).should('contain.text', '$25');\n_donationPage.default.getValueButton(3).should('contain.text', '$50');\n_donationPage.default.getValueButton(4).should('contain.text', '$100');\n_donationPage.default.getValueButton(5).should('contain.text', '$250');\n_donationPage.default.getValueButton(6).should('contain.text', '$500');\n_donationPage.default.getValueButton(7).should('contain.text', '$1000');\n_donationPage.default.getValueButton(8).should('contain.text', '$2500');\n_donationPage.default.getValueButton(9).should('contain.text', 'Other');\n_donationPage.default.getValueButton(1).click();\n_donationPage.default.giftText.should('contain', 'This gift is for');\n_donationPage.default.giftValue.should('contain.text', '10.00');\n_donationPage.default.clickButtonWithText('Where Needed Most');\n_donationPage.default.giftText.should('contain', 'Gift Summary');\n_donationPage.default.giftValue.should('contain.text', '10.00');",
+              "err": {},
+              "uuid": "4e5729ba-c986-49e2-a1e7-0d1c53ffa42d",
+              "parentUUID": "38d2b32b-a33d-4367-a0bf-02f1c32c9363",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4e5729ba-c986-49e2-a1e7-0d1c53ffa42d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 25160,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

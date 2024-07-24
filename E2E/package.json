@@ -1,5 +1,16 @@
 {
   "devDependencies": {
-    "cypress": "^13.13.1"
+    "@cypress/grep": "^4.1.0",
+    "cross-env": "^7.0.3",
+    "cypress": "^13.13.1",
+    "cypress-dotenv": "^2.0.0",
+    "cypress-tags": "^1.2.2",
+    "mochawesome": "^7.1.3"
+  },
+  "scripts": {
+    "run-tagged-tests": "cypress run --env TAGS=$TAGS"
+  },
+  "dependencies": {
+    "glob": "^11.0.0"
   }
 }

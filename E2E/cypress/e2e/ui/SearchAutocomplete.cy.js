@@ -8,8 +8,8 @@ describe('Visit page and perform search', () => {
     // Visit the base URL
     cy.visit(baseUrl);
   });
-  
-  it('Performs a search and clicks on an autocomplete result', { tags: ['smoke', 'regression'] }, () => {
+
+  it('Performs a search and clicks on an autocomplete result ', { tags: 'smoke' }, () => {
     // Type the search query and hit Enter
     SearchPage.typeSearchQuery('Givelify');
 
@@ -22,7 +22,7 @@ describe('Visit page and perform search', () => {
     cy.url().should('include', 'NzYwOTQ');
   });
 
-  it('Search by exact organization name', () => {
+  it('Search by exact organization name @smoke', () => {
     SearchPage.typeSearchQuery('Alfred Street Baptist Church');
     SearchPage.clickSearchButton();
     
@@ -46,11 +46,9 @@ describe('Visit page and perform search', () => {
     cy.get('.js-search-form__input')
     .type(keyword, { delay: 100 })
     .type("{enter}", { delay: 100 })
-    //cy.get('.js-search-form__button').click({ force: true });
-    //cy.wait(2000);
+
     cy.get('.js-search-form__input').click();
-    //cy.get('.js-search-form__input').type(`{enter}`).click();
-    //cy.get('button[type="submit"]').click();
+  
 
     // Verify that results are visible (or wait if necessary)
     cy.get('.autocomplete-result').should('be.visible');

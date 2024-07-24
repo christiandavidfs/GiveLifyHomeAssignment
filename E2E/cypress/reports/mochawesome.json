@@ -1,0 +1,181 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 5,
+    "passes": 5,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-07-24T16:08:30.204Z",
+    "end": "2024-07-24T16:08:31.621Z",
+    "duration": 1417,
+    "testsRegistered": 5,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "7bd9fbfe-5733-4354-8d04-fbdeaf9a576b",
+      "title": "",
+      "fullFile": "cypress\\e2e\\api\\Negative_api_spec.cy.js",
+      "file": "cypress\\e2e\\api\\Negative_api_spec.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "fb343d67-1364-423a-b2d9-a4ee45d7fe0b",
+          "title": "OMDB API Tests",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Check if response status is 401 and validate error message when API key is invalid",
+              "fullTitle": "OMDB API Tests Check if response status is 401 and validate error message when API key is invalid",
+              "timedOut": null,
+              "duration": 731,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const badApiKey = Cypress.env('badApiKey'); // Use the bad API key\nconst movieTitle = Cypress.env('movieTitle');\nconst url = `${Cypress.config('apiBaseUrl')}?apikey=${badApiKey}&t=${encodeURIComponent(movieTitle)}`;\ncy.request({\n  url: url,\n  failOnStatusCode: false // Prevent Cypress from failing the test on a non-2xx status code\n}).then(response => {\n  // Validate status code with a descriptive message\n  expect(response.status, 'Expected status code to be 401').to.eq(401);\n  // Validate response body\n  const jsonData = response.body;\n  // Validate the 'Response' field\n  expect(jsonData.Response, 'Expected \"Response\" to be \"False\"').to.eq('False');\n  // Validate the 'Error' field\n  expect(jsonData.Error, 'Expected \"Error\" to be \"Invalid API key!\"').to.eq('Invalid API key!');\n});",
+              "err": {},
+              "uuid": "e03e7ee1-da8c-44dc-ad2c-c717df593b10",
+              "parentUUID": "fb343d67-1364-423a-b2d9-a4ee45d7fe0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Checks if response status is 401 for missing API key",
+              "fullTitle": "OMDB API Tests Checks if response status is 401 for missing API key",
+              "timedOut": null,
+              "duration": 219,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const movieTitle = Cypress.env('movieTitle');\nconst url = `${Cypress.config('apiBaseUrl')}?t=${encodeURIComponent(movieTitle)}`;\ncy.request({\n  url,\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.eq(401);\n  expect(response.body.Error).to.eq('No API key provided.');\n});",
+              "err": {},
+              "uuid": "3caaeda2-bcf3-4e15-8baf-2990432e52ff",
+              "parentUUID": "fb343d67-1364-423a-b2d9-a4ee45d7fe0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Checks if response status is 200 for non-existing movie title",
+              "fullTitle": "OMDB API Tests Checks if response status is 200 for non-existing movie title",
+              "timedOut": null,
+              "duration": 89,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const movieTitle = 'asdas'; // Hardcoding the non-existing movie title for the test\nconst apiKey = Cypress.env('apiKey'); // Use the bad API key\nconst url = `${Cypress.config('apiBaseUrl')}?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}`;\ncy.request({\n  url,\n  failOnStatusCode: false\n}).then(response => {\n  cy.log('Request URL:', url); // Log the request URL for debugging\n  cy.log('Response Body:', response.body); // Log the response body for debugging\n  expect(response.status).to.eq(200);\n  expect(response.body.Response).to.eq('False');\n  expect(response.body.Error).to.eq('Movie not found!');\n});",
+              "err": {},
+              "uuid": "6a8019f6-2ea0-4dcc-9548-85e3edec5c6a",
+              "parentUUID": "fb343d67-1364-423a-b2d9-a4ee45d7fe0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Checks if response status is 200 but returns an empty response for missing movie title",
+              "fullTitle": "OMDB API Tests Checks if response status is 200 but returns an empty response for missing movie title",
+              "timedOut": null,
+              "duration": 96,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const apiKey = Cypress.env('apiKey'); // Use the bad API key\nconst url = `${Cypress.config('apiBaseUrl')}?apikey=${apiKey}`;\ncy.request({\n  url,\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body.Response).to.eq('False');\n  expect(response.body.Error).to.eq('Incorrect IMDb ID.');\n});",
+              "err": {},
+              "uuid": "d8f7180e-3ac2-4f56-96c8-d7d8b7539f5b",
+              "parentUUID": "fb343d67-1364-423a-b2d9-a4ee45d7fe0b",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Checks if response status is 404 for invalid URL format",
+              "fullTitle": "OMDB API Tests Checks if response status is 404 for invalid URL format",
+              "timedOut": null,
+              "duration": 73,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const apiKey = Cypress.env('apiKey'); // Use the bad API key\nconst invalidUrl = `${Cypress.config('apiBaseUrl')}/invalidEndpoint?apikey=${apiKey}&t=A%20Star%20Is%20Born`;\ncy.request({\n  url: invalidUrl,\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.eq(404);\n});",
+              "err": {},
+              "uuid": "e0ed7232-f6e1-47ca-b1ff-0ad59eaa99cc",
+              "parentUUID": "fb343d67-1364-423a-b2d9-a4ee45d7fe0b",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e03e7ee1-da8c-44dc-ad2c-c717df593b10",
+            "3caaeda2-bcf3-4e15-8baf-2990432e52ff",
+            "6a8019f6-2ea0-4dcc-9548-85e3edec5c6a",
+            "d8f7180e-3ac2-4f56-96c8-d7d8b7539f5b",
+            "e0ed7232-f6e1-47ca-b1ff-0ad59eaa99cc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1208,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

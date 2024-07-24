@@ -15,13 +15,11 @@ class SearchPage {
     }
   
     typeSearchQuery(query) {
-      //this.searchInput.type(`${query}{enter}`);
-      //this.searchInput.click().type(`${query}{enter}`).click();
-      //this.searchInput.click().type(`{enter}`).click();
+
       this.searchInput.click()
       .type(`${query}`, { delay: 100 })
       .type("{enter}", { delay: 100 });
-      //this.searchInput.click({ force: true });
+
     }
   
     // New method to click on an autocomplete result based on text

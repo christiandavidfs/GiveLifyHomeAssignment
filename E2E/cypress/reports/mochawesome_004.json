@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-07-24T16:08:52.402Z",
+    "end": "2024-07-24T16:09:08.321Z",
+    "duration": 15919,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "41710781-86eb-4176-a555-30d6f3ffdf9c",
+      "title": "",
+      "fullFile": "cypress\\e2e\\api\\performance.cy.js",
+      "file": "cypress\\e2e\\api\\performance.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9907d0b6-4571-46a1-897f-20096808e866",
+          "title": "Performance Validation Suite",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Should load the page within 3 seconds",
+              "fullTitle": "Performance Validation Suite Should load the page within 3 seconds",
+              "timedOut": null,
+              "duration": 5339,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const maxLoadTime = 3000; // 3 seconds\ncy.visit('https://www.givelify.com', {\n  onLoad: contentWindow => {\n    // Measure the page load time\n    const startTime = performance.now();\n    cy.window().then(win => {\n      const loadTime = performance.now() - startTime;\n      expect(loadTime).to.be.lessThan(maxLoadTime, `Page load time should be less than ${maxLoadTime} ms`);\n    });\n  }\n});",
+              "err": {},
+              "uuid": "da4cda27-2d68-404b-9a43-d12b156de5e5",
+              "parentUUID": "9907d0b6-4571-46a1-897f-20096808e866",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should render the search results within 3 seconds",
+              "fullTitle": "Performance Validation Suite Should render the search results within 3 seconds",
+              "timedOut": null,
+              "duration": 3936,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const maxRenderTime = 3000; // 3 seconds\ncy.visit('https://www.givelify.com');\n// Type the search query and hit Enter\n_searchPage.default.typeSearchQuery('Givelify');\n// Measure the time taken to render the search results\ncy.get('#autoComplete_result_0 .autocomplete-result', {\n  timeout: maxRenderTime\n}).should('be.visible').then(() => {\n  cy.log(`Element rendered within ${maxRenderTime} ms`);\n});",
+              "err": {},
+              "uuid": "77055a7a-20a3-4d9e-8151-3da3ea93a419",
+              "parentUUID": "9907d0b6-4571-46a1-897f-20096808e866",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Should get a response within 3 seconds",
+              "fullTitle": "Performance Validation Suite Should get a response within 3 seconds",
+              "timedOut": null,
+              "duration": 523,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const maxResponseTime = 3000; // 3 seconds\nconst apiKey = Cypress.env('apiKey');\nconst movieTitle = Cypress.env('movieTitle');\nconst url = `${Cypress.config('apiBaseUrl')}?apikey=${apiKey}&t=${encodeURIComponent(movieTitle)}`;\ncy.request({\n  url: `${url}`,\n  timeout: maxResponseTime // Ensure request timeout is set\n}).then(response => {\n  // Validate that the response time is within the acceptable range\n  expect(response.duration).to.be.lessThan(maxResponseTime, `API response time should be less than ${maxResponseTime} ms`);\n});",
+              "err": {},
+              "uuid": "b5b4cac8-4669-4408-8697-e24836381d9c",
+              "parentUUID": "9907d0b6-4571-46a1-897f-20096808e866",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "da4cda27-2d68-404b-9a43-d12b156de5e5",
+            "77055a7a-20a3-4d9e-8151-3da3ea93a419",
+            "b5b4cac8-4669-4408-8697-e24836381d9c"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9798,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
