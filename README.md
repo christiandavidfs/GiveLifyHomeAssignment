@@ -20,6 +20,9 @@ npm install
 to run the test one by one:
 npx cypress open
 
+to run all the tests:
+npx cypress run
+
 to run the tests with a word in the title:
 npx cypress run --env grep="keyword"
 
