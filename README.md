@@ -91,3 +91,39 @@ In this case we are trying to manage this questions
 search results being returned in a timely manner?
 
 Some of the steps show in the documentation is focused for a work on teams (QA+DEV or QA+QA) like te implementation of pair reviews to ensure the quality of code and/or test cases design.
+
+# Tests Structure
+
+We have inside cypress/e2e a folder structure with different kind of tests.
+
+Api folder
+
+We have positive and negative tests for the api tests.
+
+Negative_api_spec.cy.js
+We have tests t validate different error messages
+performance.cy.js
+We have easy tests to assert the load time for web and api are under 3 seconds (3000ms)
+Positive json against response api_spec.cy.js
+We are comparing the full json against the api response
+Positive_api_spec_BySearch.cy.js
+Various tests using the By Search Title
+Positive_api_spec_ByTitle.cy.js
+Some other positive tests searching by title, expecting valid movie titles and reatings, plus the hability to override the data to be asserted.
+
+Pages folder
+
+Here you can find page elements, a sort of page objects.
+
+ui folder
+
+Here we have the test for the user interface
+
+ 
+fixture folder
+
+Here we can save json files or other files to compare and use them in the tests
+
+Jmeter folder
+
+Folder for the load tests
