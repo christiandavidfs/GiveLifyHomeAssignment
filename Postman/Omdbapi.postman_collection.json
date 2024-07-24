@@ -1,0 +1,433 @@
+{
+	"info": {
+		"_postman_id": "6dfabdde-a616-43f4-84bf-593acc063eee",
+		"name": "Omdbapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3549106"
+	},
+	"item": [
+		{
+			"name": "Positive",
+			"item": [
+				{
+					"name": "HappyPathBasic",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check if response status is 200\", function () {\r",
+									"    var status = pm.response.code;\r",
+									"    pm.expect(status).to.eql(200);\r",
+									"\r",
+									"    if (status === 200) {\r",
+									"        // Proceed with the remaining tests\r",
+									"        var jsonData = pm.response.json();\r",
+									"\r",
+									"        pm.test(\"Response contains correct movie title\", function () {\r",
+									"            pm.expect(jsonData.Title).to.eql(\"A Star Is Born\");\r",
+									"            pm.expect(jsonData.Year).to.eql(\"2018\");\r",
+									"        });\r",
+									"\r",
+									"        pm.test(\"Response contains correct ratings\", function () {\r",
+									"            pm.expect(jsonData.Ratings).to.be.an(\"array\").that.is.not.empty;\r",
+									"            pm.expect(jsonData.Ratings[0]).to.have.property(\"Source\", \"Internet Movie Database\");\r",
+									"            pm.expect(jsonData.Ratings[0]).to.have.property(\"Value\", \"7.6/10\");\r",
+									"        });\r",
+									"\r",
+									"        // Add more tests as needed\r",
+									"    } else {\r",
+									"        // Log an error message if the status is not 200\r",
+									"        console.error(\"Error: The condition is not met. Expected status 200, but received status \" + status);\r",
+									"        // Optionally, you can throw an error to stop the execution\r",
+									"        throw new Error(\"The condition is not met. Expected status 200, but received status \" + status);\r",
+									"    }\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{vault:omdb-api-api-key:value}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "apikey",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{apiKey}}{{movieTitle2}}‘A star is born’",
+							"host": [
+								"{{baseUrl}}{{apiKey}}{{movieTitle2}}‘A star is born’"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HappyPathplusYear",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate response\", function () {\r",
+									"    var status = pm.response.code;\r",
+									"    pm.expect(status).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate response structure\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    // Check the presence of required fields\r",
+									"    pm.expect(jsonData).to.have.property(\"Title\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Year\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Rated\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Released\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Runtime\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Genre\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Director\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Writer\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Actors\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Plot\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Language\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Country\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Awards\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Poster\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Ratings\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Metascore\");\r",
+									"    pm.expect(jsonData).to.have.property(\"imdbRating\");\r",
+									"    pm.expect(jsonData).to.have.property(\"imdbVotes\");\r",
+									"    pm.expect(jsonData).to.have.property(\"imdbID\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Type\");\r",
+									"    pm.expect(jsonData).to.have.property(\"DVD\");\r",
+									"    pm.expect(jsonData).to.have.property(\"BoxOffice\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Production\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Website\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Response\");\r",
+									"\r",
+									"    // Validate some specific values\r",
+									"    pm.expect(jsonData.Title).to.eql(\"A Star Is Born\");\r",
+									"    pm.expect(jsonData.Year).to.eql(\"2018\");\r",
+									"    pm.expect(jsonData.Rated).to.eql(\"R\");\r",
+									"    pm.expect(jsonData.Released).to.eql(\"05 Oct 2018\");\r",
+									"    pm.expect(jsonData.Runtime).to.eql(\"136 min\");\r",
+									"    pm.expect(jsonData.Genre).to.eql(\"Drama, Music, Romance\");\r",
+									"    pm.expect(jsonData.Director).to.eql(\"Bradley Cooper\");\r",
+									"    pm.expect(jsonData.Writer).to.include(\"Eric Roth\");\r",
+									"    pm.expect(jsonData.Actors).to.include(\"Lady Gaga\");\r",
+									"    pm.expect(jsonData.Language).to.include(\"English\");\r",
+									"    pm.expect(jsonData.Country).to.eql(\"United States\");\r",
+									"    pm.expect(jsonData.Awards).to.include(\"Won 1 Oscar\");\r",
+									"    pm.expect(jsonData.Metascore).to.eql(\"88\");\r",
+									"    pm.expect(jsonData.imdbRating).to.eql(\"7.6\");\r",
+									"    pm.expect(jsonData.imdbVotes).to.eql(\"422,949\");\r",
+									"    pm.expect(jsonData.imdbID).to.eql(\"tt1517451\");\r",
+									"    pm.expect(jsonData.Type).to.eql(\"movie\");\r",
+									"    pm.expect(jsonData.Response).to.eql(\"True\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Validate response values\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    // Validate some specific values\r",
+									"    pm.expect(jsonData.Title).to.eql(\"A Star Is Born\");\r",
+									"    pm.expect(jsonData.Year).to.eql(\"2018\");\r",
+									"    pm.expect(jsonData.Rated).to.eql(\"R\");\r",
+									"    pm.expect(jsonData.Released).to.eql(\"05 Oct 2018\");\r",
+									"    pm.expect(jsonData.Runtime).to.eql(\"136 min\");\r",
+									"    pm.expect(jsonData.Genre).to.eql(\"Drama, Music, Romance\");\r",
+									"    pm.expect(jsonData.Director).to.eql(\"Bradley Cooper\");\r",
+									"    pm.expect(jsonData.Writer).to.include(\"Eric Roth\");\r",
+									"    pm.expect(jsonData.Actors).to.include(\"Lady Gaga\");\r",
+									"    pm.expect(jsonData.Language).to.include(\"English\");\r",
+									"    pm.expect(jsonData.Country).to.eql(\"United States\");\r",
+									"    pm.expect(jsonData.Awards).to.include(\"Won 1 Oscar\");\r",
+									"    pm.expect(jsonData.Metascore).to.eql(\"88\");\r",
+									"    pm.expect(jsonData.imdbRating).to.eql(\"7.6\");\r",
+									"    pm.expect(jsonData.imdbVotes).to.eql(\"422,949\");\r",
+									"    pm.expect(jsonData.imdbID).to.eql(\"tt1517451\");\r",
+									"    pm.expect(jsonData.Type).to.eql(\"movie\");\r",
+									"    pm.expect(jsonData.Response).to.eql(\"True\");\r",
+									"\r",
+									"    // Validate Ratings structure and values\r",
+									"    pm.expect(jsonData.Ratings).to.be.an(\"array\").that.is.not.empty;\r",
+									"    pm.expect(jsonData.Ratings[0]).to.have.property(\"Source\", \"Internet Movie Database\");\r",
+									"    pm.expect(jsonData.Ratings[0]).to.have.property(\"Value\", \"7.6/10\");\r",
+									"    pm.expect(jsonData.Ratings[1]).to.have.property(\"Source\", \"Rotten Tomatoes\");\r",
+									"    pm.expect(jsonData.Ratings[1]).to.have.property(\"Value\", \"90%\");\r",
+									"    pm.expect(jsonData.Ratings[2]).to.have.property(\"Source\", \"Metacritic\");\r",
+									"    pm.expect(jsonData.Ratings[2]).to.have.property(\"Value\", \"88/100\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{vault:omdb-api-api-key:value}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "apikey",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{apiKey}}{{movieTitle2}}‘A star is born’&y=2018",
+							"host": [
+								"{{baseUrl}}{{apiKey}}{{movieTitle2}}‘A star is born’&y=2018"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negative",
+			"item": [
+				{
+					"name": "WrongApiKey",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.get()\r",
+									"pm.test(\"Response status is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function generateRandomAlphanumeric(length) {\r",
+									"    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';\r",
+									"    let result = '';\r",
+									"    for (let i = 0; i < length; i++) {\r",
+									"        result += chars.charAt(Math.floor(Math.random() * chars.length));\r",
+									"    }\r",
+									"    return result;\r",
+									"}\r",
+									"\r",
+									"const randomString = generateRandomAlphanumeric(8);\r",
+									"\r",
+									"// Save the random string in an environment variable\r",
+									"pm.collectionVariables.set(\"randomAlphanumeric\", randomString);\r",
+									"// Log the generated random string to the console (optional)\r",
+									"console.log(\"Generated random alphanumeric string: \" + randomString);\r",
+									"\r",
+									"\r",
+									"// Define the string\r",
+									"let movieTitle = \"A star is born\";\r",
+									"\r",
+									"// URL encode the string\r",
+									"let encodedTitle = encodeURIComponent(movieTitle);\r",
+									"\r",
+									"// Set the encoded string as an environment variable\r",
+									"pm.collectionVariables.set(\"encodedMovieTitle\", encodedTitle);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{vault:omdb-api-api-key:value}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "apikey",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}{{randomAlphanumeric}}{{movieTitle2}}{{encodedMovieTitle}}",
+							"host": [
+								"{{baseUrl}}{{randomAlphanumeric}}{{movieTitle2}}{{encodedMovieTitle}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NonExistantMovie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Validate response structure and values\", function () {\r",
+									"    // Parse the response JSON\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    // Validate the response structure and values\r",
+									"    pm.expect(jsonData).to.have.property(\"Response\", \"False\");\r",
+									"    pm.expect(jsonData).to.have.property(\"Error\", \"Movie not found!\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": [
+								{
+									"key": "value",
+									"value": "{{vault:omdb-api-api-key:value}}",
+									"type": "string"
+								},
+								{
+									"key": "key",
+									"value": "apikey",
+									"type": "string"
+								},
+								{
+									"key": "in",
+									"value": "query",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}{{apiKey}}{{movieTitle2}}‘asdas’",
+							"host": [
+								"{{baseUrl}}{{apiKey}}{{movieTitle2}}‘asdas’"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl0",
+			"value": "http://www.omdbapi.com/",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://www.omdbapi.com/?apikey=",
+			"type": "string"
+		},
+		{
+			"key": "apiKey",
+			"value": "fbb9a6d2",
+			"type": "string"
+		},
+		{
+			"key": "movieTitle",
+			"value": "&t=‘A star is born’",
+			"type": "string"
+		},
+		{
+			"key": "movieTitle2",
+			"value": "&t=",
+			"type": "string"
+		},
+		{
+			"key": "wrongApiKey",
+			"value": "frfbb9a6d2w5w4ebreby5",
+			"type": "string"
+		},
+		{
+			"key": "randomAlphanumeric",
+			"value": ""
+		},
+		{
+			"key": "encodedMovieTitle",
+			"value": ""
+		}
+	]
+}
